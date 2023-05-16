@@ -15,6 +15,3 @@ def gen (camera):
 @app.route('/video_feed')
 def video_feed():
     return Response(gen(HAT.VideoCamera()), mimetype='multipart/x-mixed-replace; boundary=frame')
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000, debug=True)
