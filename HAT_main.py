@@ -7,8 +7,11 @@ import math
 import HAT_module as HAT
     
 app =Flask(__name__)
-
 @app.route('/')
+def video_feed():
+    return Response(gen(HAT.VideoCamera()), mimetype='multipart/x-mixed-replace; boundary=frame')
+
+@app.route('/main')
 def index():
     return render_template('index.html')
 def gen (camera):
@@ -18,6 +21,4 @@ def gen (camera):
               b'Content-type: image/jpeg\r\n\r\n' + frame 
               +b'\r\n\r\n')
 
-@app.route('/video_feed')
-def video_feed():
-    return Response(gen(HAT.VideoCamera()), mimetype='multipart/x-mixed-replace; boundary=frame')
+
